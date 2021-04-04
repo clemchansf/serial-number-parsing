@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "perf_hooks": "^0.0.1"
+  },
+  "scripts": {
+    "test": "jasmine"
+  },
+  "devDependencies": {
+    "jasmine": "^3.7.0"
+  }
+}
