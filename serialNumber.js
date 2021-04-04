@@ -1,30 +1,10 @@
 function isValid(sn) {
-  if (sn.length < 10 || sn.length > 12) return false
-
-  var code = sn.substr(0, 3) // pos 0, take 3 characters
-  if (!Boolean(code.match(/^[A-Z]{3}$/))) return false
-  var uniqCode = new Set(code.split(""))
-  if (Array.from(uniqCode).length !== 3) return false
-
-  var year = sn.substr(3, 4) // yyyy, take 4 char start at index 3
-  if (!Boolean(year.match(/^[\d]{4}$/))) return false
-  var intYear = parseInt(year, 10)
-  if (intYear < 1900 || intYear > 2019) return false
-
-  var domin = sn.substr(7, 1) // domination leading char
-  if (!Boolean(domin.match(/^[125]$/))) return false
-  var intDomin = parseInt(domin, 10)
-
-  var amount = sn.substr(8) // rest of string
-  var length_of_zeros = amount.length - 1
-  var lastChar = amount[length_of_zeros]
-  if (!Boolean(lastChar.match(/^[A-Z]$/))) return false
-
-  var zeros = amount.substr(0, length_of_zeros)
-  if (!Boolean(zeros.match(/^[0]*$/g))) return false
-
-  var intZeros = parseInt("1" + zeros, 10)
-  var newTotal = intDomin * intZeros
+  if (sn[0] === sn[1] || sn[0] === sn[2] || sn[1] === sn[2]) return false
+  var terms = sn.match(/^([A-Z]{3})(\d{4})(\d{1})(0*)([A-Z])$/)
+  if (!terms) return false
+  const iY = parseInt(terms[2])
+  if (iY < 1900 || iY > 2019) return false
+  var newTotal = parseInt(terms[3]) * parseInt("1" + terms[4], 10)
   return newTotal
 }
 
